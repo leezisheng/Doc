@@ -52,7 +52,7 @@ print(id(ClassName), type(ClassName), ClassName)
 print(id(c), type(c), c)
 ```
 
-![](static/OvxhbQs04oq9X3xAqtRcFQFUnoh.png)
+![image](https://img2024.cnblogs.com/blog/2591203/202406/2591203-20240627013630336-344689800.png)
 
 这里，我们使用 printf 函数输出类和实例的相关信息。需要说明的是，在 Python，所有的数据类型，值，变量，函数，类，实例等等一切可操作的基本单元都使用对象（Object）表示。**每个对象有三个基本属性：ID，类型和值，也即有一块内存中存储了一个对象，这块内存中一定存有这三个属性。**在以上的输出中，**我们可以看到在 Python 中定义一个新类（Class）等于创建了一个新类型（Type）的对象（Object），解释器中一切对象均存储在 PyObject 结构中。**
 
@@ -82,26 +82,32 @@ class SerialClass:
 
 [https://github.com/leezisheng/Doc](https://github.com/leezisheng/Doc)
 
-![](static/XiZLbMYkioLGhwxOlaKcLfmmnUd.png)
+![image](https://img2024.cnblogs.com/blog/2591203/202406/2591203-20240627013618920-1535800624.png)
+
 
 **本文档主要介绍如何使用 Python 进行面向对象编程，需要读者对 Python 语法和单片机开发具有基本了解。相比其他讲解 Python 面向对象编程的博客或书籍而言，本文档更加详细、侧重于嵌入式上位机应用，以上位机和下位机的常见串口数据收发、数据处理、动态图绘制等为应用实例，同时使用 Sourcetrail 代码软件对代码进行可视化阅读便于读者理解。**
 
 **相关示例代码获取链接如下：**[https://github.com/leezisheng/Python-OOP-Demo](https://github.com/leezisheng/Python-OOP-Demo)
 
-![](static/IGxLbFUzfoGQ7BxpiROcPW76nrg.png)
+![image](https://img2024.cnblogs.com/blog/2591203/202406/2591203-20240627013742619-1494470491.png)
+
 
 # **往期推荐：**
 
+[**学嵌入式的你，还不会面向对象？？！**](http://mp.weixin.qq.com/s?__biz=MzkwMTYzNTY3Ng==&mid=2247483825&idx=1&sn=149aaf3baa6a96703713e554d4a888db&chksm=c0b08a82f7c70394074a24b722a1caddb0ad598a7303e61133216ae61423df0b5bc57a6b82b2&scene=21#wechat_redirect "**学嵌入式的你，还不会面向对象？？！**")
+
+[**全网最适合入门的面向对象编程教程：00 面向对象设计方法导论**](https://mp.weixin.qq.com/s/sycnlnMhtFji8q2fYh0MFQ "**全网最适合入门的面向对象编程教程：00 面向对象设计方法导论**")
+
+[**全网最适合入门的面向对象编程教程：01 面向对象编程的基本概念**](http://mp.weixin.qq.com/s?__biz=MzkwMTYzNTY3Ng==&mid=2247483853&idx=1&sn=c7685237216b8dd1cadf95f3353fde8e&chksm=c0b08afef7c703e8ce7b76958718ebe381220a199fac9e872710ea1cb4f8fc6f93d36d151279&scene=21#wechat_redirect "**全网最适合入门的面向对象编程教程：01 面向对象编程的基本概念**")
+
 # **更多精彩内容可看：**
 
-**学嵌入式的你，还不会面向对象？？！**
+[**给你的 Python 加加速：一文速通 Python 并行计算**](https://mp.weixin.qq.com/s?__biz=MzkwMTYzNTY3Ng==&mid=2247483747&idx=1&sn=0e203586516fd6e925085b9c1244dbee&scene=21#wechat_redirect "**给你的 Python 加加速：一文速通 Python 并行计算**")
 
-**全网最适合入门的面向对象编程教程：00 面向对象设计方法导论**
+[**一文搞懂 CM3 单片机调试原理**](https://mp.weixin.qq.com/s?__biz=MzkwMTYzNTY3Ng==&mid=2247483719&idx=1&sn=7ece9da65d002fdc3df9539cc43f3a8d&scene=21#wechat_redirect "**一文搞懂 CM3 单片机调试原理**")
 
-**给你的 Python 加加速：一文速通 Python 并行计算**
+[**肝了半个月，嵌入式技术栈大汇总出炉**](https://mp.weixin.qq.com/s?__biz=MzkwMTYzNTY3Ng==&mid=2247483671&idx=1&sn=c267a0c6f4ab93d6b6d934bf803b5919&scene=21#wechat_redirect "**肝了半个月，嵌入式技术栈大汇总出炉**")
 
-**一文搞懂 CM3 单片机调试原理**
+[**电子计算机类比赛的“武林秘籍”**](https://mp.weixin.qq.com/s?__biz=MzkwMTYzNTY3Ng==&mid=2247483774&idx=1&sn=46d57506febe92c1719c8567ebe95269&scene=21#wechat_redirect "**电子计算机类比赛的“武林秘籍”**")
 
-**肝了半个月，嵌入式技术栈大汇总出炉**
-
-**电子计算机类比赛的“武林秘籍”**
+[**一个MicroPython的开源项目集锦：awesome-micropython，包含各个方面的Micropython工具库**](https://mp.weixin.qq.com/s?__biz=MzkwMTYzNTY3Ng==&mid=2247483854&idx=1&sn=fd666dc501a0de850abfbd8793abff00&chksm=c0b08afdf7c703eb494f8e402a5d60eba9a802bfdb02c07a5e1666a8a1b335e38240adc6c1b5&scene=21#wechat_redirect "**一个MicroPython的开源项目集锦：awesome-micropython，包含各个方面的Micropython工具库**")

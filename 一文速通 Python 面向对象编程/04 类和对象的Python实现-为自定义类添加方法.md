@@ -4,8 +4,6 @@
 
 本文我们主要讲解了如何为自定义类添加方法，pyseria 库的基本使用（串口数据收发、serial.Serial 类的属性和方法），VSPDPro 虚拟串口软件使用方法等，并使用自定义的串口类和 PC 主机进行串口数据收发。
 
-# 原文链接：
-
 # **往期推荐：**
 
 [**学嵌入式的你，还不会面向对象？？！**](http://mp.weixin.qq.com/s?__biz=MzkwMTYzNTY3Ng==&mid=2247483825&idx=1&sn=149aaf3baa6a96703713e554d4a888db&chksm=c0b08a82f7c70394074a24b722a1caddb0ad598a7303e61133216ae61423df0b5bc57a6b82b2&scene=21#wechat_redirect "**学嵌入式的你，还不会面向对象？？！**")
@@ -37,7 +35,8 @@
 
 [https://github.com/leezisheng/Doc](https://github.com/leezisheng/Doc)
 
-![](static/DngAbH7EXoGT3GxW4N1c8WYSn4e.png)
+![image](https://img2024.cnblogs.com/blog/2591203/202406/2591203-20240629020055160-163886993.png)
+
 
 **本文档主要介绍如何使用 Python 进行面向对象编程，需要读者对 Python 语法和单片机开发具有基本了解。相比其他讲解 Python 面向对象编程的博客或书籍而言，本文档更加详细、侧重于嵌入式上位机应用，以上位机和下位机的常见串口数据收发、数据处理、动态图绘制等为应用实例，同时使用 Sourcetrail 代码软件对代码进行可视化阅读便于读者理解。**
 
@@ -87,7 +86,8 @@ for item in dir(serdev):
     print(item)
 ```
 
-![](static/TovFbxiiFodplDxCa5qccuNFnTh.png)
+![image](https://img2024.cnblogs.com/blog/2591203/202406/2591203-20240629020121899-428642547.png)
+
 
 可以看到，我们已经给串口类添加了具体方法，这里，你可能会问，那这些方法具体该怎么实现呢？难道说要我们调操作系统的驱动函数读取串口、造轮子对数据解析？当然不可能，Python 强大的第三方库什么都有，这不，它来了：
 
@@ -99,15 +99,16 @@ pySerial 的安装很简单，只需要执行一条命令：**pip install pyseri
 
 pySerial 中主要的类就是 class serial.Serial，官方文档说明如下：
 
-![](static/IOVFbmVn4oFpAjxe1NMcROrBngd.png)
+![image](https://img2024.cnblogs.com/blog/2591203/202406/2591203-20240629020153133-746226627.png)
+
 
 常用参数含义如下：
 
 | **参数名称**      | **含义**                                                                                                                                                                                                |
 | ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **port**          | 定义设备名称                                                                                                                                                                                            |
-| ** ****baudrate** | 波特率：波特率是指串口通信中每秒钟传输的符号数，单位是波特（baud）。它决定了数据传输的速度和效率。在串口通信中，收发双方必须使用相同的波特率才能正常通信。典型值为：9600, 19200, 38400, 57600, 115200。 |
-| ** ****bytesize** | 数据位：数据位是指在每个数据包中传输的实际数据位数。它表示每个数据包中携带的有效信息量。常见的数据位长度有 5 位、7 位和 8 位。典型值为： FIVEBITS, SIXBITS, SEVENBITS, EIGHTBITS。                      |
+| **baudrate** | 波特率：波特率是指串口通信中每秒钟传输的符号数，单位是波特（baud）。它决定了数据传输的速度和效率。在串口通信中，收发双方必须使用相同的波特率才能正常通信。典型值为：9600, 19200, 38400, 57600, 115200。 |
+| **bytesize** | 数据位：数据位是指在每个数据包中传输的实际数据位数。它表示每个数据包中携带的有效信息量。常见的数据位长度有 5 位、7 位和 8 位。典型值为： FIVEBITS, SIXBITS, SEVENBITS, EIGHTBITS。                      |
 | **parity**        | 设置校验位，奇偶校验是一种错误检测方式，用于检查数据传输过程中是否出现错误，可选择偶校验或奇校验。典型值为：PARITY_NONE, PARITY_EVEN, PARITY_ODD PARITY_MARK, PARITY_SPACE。                            |
 | **stopbits**      | 停止位是指在数据包的末尾添加的一个额外的位，用于标识一个数据包的结束。停止位的长度可以是 1 位、1.5 位或 2 位。典型值为： STOPBITS_ONE, STOPBITS_ONE_POINT_FIVE, STOPBITS_TWO。                          |
 | **timeout**       | 设置读取超时值（以秒为单位）：可选参数为-0、None、x。                                                                                                                                                   |
@@ -169,9 +170,7 @@ class SerialClass:
 - 在打开串口和关闭串口函数中，我们使用 self.dev.open()、self.dev.close()语句，相当于直接调用 serial.open()和 serial.close()方法；
 - **重点就在收发函数中，需要特别注意的有两点：**
 
-① 串口接收到的是二进制数据，如果接收到的 data 全是英文，就**需要用 utf-8 编码将二进制数据解码为 unicode 字符串。**如果 data 里包含中文，则最好以 gb18030 编码将二进制数据解码为 unicode 字符串。
-
-同时，有时候由于带中文，或者由于串口的传输线缆出现接触不良等原因，会产生错误或者乱码，如果直接解码，就会报错，**为了能够顺畅的解码串口打印，避免这种情况发送，decode 的参数里加上“replace”即可。**它实现的作用是，如果解码的过程中遇到错误，会自动以问号?代替解码失败的字符。
+① 串口接收到的是二进制数据，如果接收到的 data 全是英文，就**需要用 utf-8 编码将二进制数据解码为 unicode 字符串。**如果 data 里包含中文，则最好以 gb18030 编码将二进制数据解码为 unicode 字符串。同时，有时候由于带中文，或者由于串口的传输线缆出现接触不良等原因，会产生错误或者乱码，如果直接解码，就会报错，**为了能够顺畅的解码串口打印，避免这种情况发送，decode 的参数里加上“replace”即可。**它实现的作用是，如果解码的过程中遇到错误，会自动以问号?代替解码失败的字符。
 
 ② 在串口发送中，pyserial 的文档注明了，**write 的输入参数必须是 bytes 格式的（也就是二进制数据）**，python3 里对字符串和二进制数据流有明确的区分，文本总是 unicode 编码储存的，由 str 类型表示。二进制数据则由 bytes 类型表示，所以**字符串数据需要 encode()函数将其编码为二进制数据，然后才可以顺利发送**。
 
@@ -181,13 +180,15 @@ class SerialClass:
 
 **这里我们使用 VSPDProv6.9 软件，创建虚拟串口，软件下载安装教程点击链接：**<u>[https://www.xue51.com/soft/9349.html](https://www.xue51.com/soft/9349.html)</u>
 
-![](static/LZdzbx0BhoDTxFx3xAvc8ntqnOc.png)
+![image](https://img2024.cnblogs.com/blog/2591203/202406/2591203-20240629020334915-422413140.png)
+
 
 这里我们创建两个相互连接的串口 com11 和 com17，虚拟的串口需要成对创建，来指明他们的连接关系，就好比各种连接线的公投和母头一样。我们建立好虚拟串口连接以后，就可以使用它们来通讯了，我们可以选择任意一个串口助手软件来与我们写的 python 串口类进行通信。这里，我们选择 xcom 软件进行测试，xcom 软件的安装下载教程可以点击链接：          <u>[https://blog.csdn.net/qq_41573860/article/details/103796913](https://blog.csdn.net/qq_41573860/article/details/103796913)</u>
 
 打开 xcom 软件，我们先进行相关串口参数的配置，具体如下图所示：
 
-![](static/MDHVbmELdoRjWax0NP8c9wCFngb.png)
+![image](https://img2024.cnblogs.com/blog/2591203/202406/2591203-20240629020434992-155817379.png)
+
 
 此时，我们在 Python 程序中，创建串口设备实例，连接 com17，代码如下：
 
@@ -218,8 +219,9 @@ print("device close")
 ```
 
 运行结果如下：
+![image](https://img2024.cnblogs.com/blog/2591203/202406/2591203-20240629020545960-771625459.png)
 
-![](static/FpeHbmcUboi3uRx4RFmcUyLUnce.png)
+
 
 接下来，我们尝试使用 Python 完成串口接收功能，我们在 xcom 中定时发送，在 Python 中轮询接收并打印接收的数据，这里我们导入 time 库，打印接收时间。time 库是 Python 中处理时间的标准库，是最基础的时间处理库。time 库主要用于计时和获取系统时间，**time.ctime()函数用于获取当前世界统一时间，形式为“星期-月份-当月号-时-分-秒-年份”**。
 
@@ -233,10 +235,11 @@ while True:
     print("recieve time:"+str(time.ctime()))
 ```
 
-![](static/GRHQbuBe1oKn92xvNT1cA53Xnpv.png)
+![image](https://img2024.cnblogs.com/blog/2591203/202406/2591203-20240629020644490-683132571.png)
+
 
 运行结果如下：
 
-![](static/GZimbHlAdopE7YxJxXOcmZywnWc.png)
+![image](https://img2024.cnblogs.com/blog/2591203/202406/2591203-20240629020721208-522719458.png)
 
-![](static/BxhNbGbaFod7lEx6SZvcthk3n0b.png)
+![image](https://img2024.cnblogs.com/blog/2591203/202406/2591203-20240629020735038-394146862.png)
